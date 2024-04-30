@@ -14,6 +14,25 @@ class Task():
         for task in self.tasks:
             if task["description"] == description:
                 task["status"] = "выполнено"
-                print(f"Задача выполнена")
-            else:
-                print(f"Задача не выполнена")
+                print(f"Задача {description} выполнена")
+                break
+
+    def get_pending_tasks(self):
+        return [task for task in self.tasks if task["status"] == "не выполнено"]
+    def list_tasks(self):
+        print("Текущие задачи")
+        for task in self.tasks:
+            if task["status"] == "не выполнено":
+                print(f"{task["description"]} - {task["deadline"]}")
+
+Zada4a = Task()
+Zada4a.add_task("Приготовить ужин", "30.04.2024")
+Zada4a.add_task("Визит к врачу", "01.05.2024")
+Zada4a.add_task("Пройти урок", "02.05.2024")
+
+Zada4a.list_tasks()
+Zada4a.mark_as_done("Приготовить ужин")
+
+pending_tasks = Zada4a.get_pending_tasks()
+for task in pending_tasks:
+    print(f"Задача: {task["description"]}, Срок: {task["deadline"]}, Статус: {task["status"]}")
